@@ -305,18 +305,6 @@ public class DBproject{
 		int age;
 		int seats;
 		String model;
-		do {
-			//Asking for id of plane
-			System.out.print("You have selected to add a plane to the database. Please enter in the following details: \n");
-			System.out.print("What is the id of the plane?\n");
-			try { 
-				id = Integer.parseInt(in.readLine());
-				break;
-			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
-				continue;
-			}
-		}while (true);
 
 		do {
 			//Asking for make of plane
@@ -365,6 +353,19 @@ public class DBproject{
 				continue;
 			}
 		}while (true);
+
+		try {
+			//Inserting plane into database
+			String query = String.format("SELECT id FROM Plane");
+			List<List<String>> data_id = esql.executeQueryAndReturnResult(query);
+			id = data_id.size();
+
+			query = String.format("INSERT INTO Plane (id, make, model, age, seats) VALUES (%d, '%s', '%s', %d, %d)", id, make, model, age, seats);
+			esql.executeUpdate(query);
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
 	}
 
 	public static void AddPilot(DBproject esql) {//2
