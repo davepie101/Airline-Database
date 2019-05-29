@@ -308,7 +308,7 @@ public class DBproject{
 
 		do {
 			//Asking for make of plane
-			System.out.print("You have selected to add a plane to the database. Please answer the following questions.\n")
+			System.out.print("You have selected to add a plane to the database. Please answer the following questions.\n");
 			System.out.print("What is the make of the plane?\n");
 			try {
 				make = in.readLine();
@@ -422,6 +422,36 @@ public class DBproject{
 
 	public static void ListNumberOfAvailableSeats(DBproject esql) {//6
 		// For flight number and date, find the number of availalbe seats (i.e. total plane capacity minus booked seats )
+		int flight_num;
+		String depart_date;
+		do {
+			//Asking for flight number
+			System.out.print("To find the number of seats for a given flight, please enter the following information. \n");
+			System.out.print("What is the flight number?\n");
+			try {
+				flight_num = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			System.out.print("What is the departure date of the flight?\n");
+			
+			try {
+				depart_date = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		try {
+		}
+
 	}
 
 	public static void ListsTotalNumberOfRepairsPerPlane(DBproject esql) {//7
