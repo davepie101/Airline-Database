@@ -300,6 +300,13 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddPlane(DBproject esql) {//1
+		try {
+			String query = "";
+			System.out.print("");
+			String input = in.readLine();
+			query += input;
+
+		}
 	}
 
 	public static void AddPilot(DBproject esql) {//2
