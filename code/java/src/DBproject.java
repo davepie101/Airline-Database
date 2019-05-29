@@ -308,6 +308,7 @@ public class DBproject{
 
 		do {
 			//Asking for make of plane
+			System.out.print("You have selected to add a plane to the database. Please answer the following questions.\n")
 			System.out.print("What is the make of the plane?\n");
 			try {
 				make = in.readLine();
@@ -365,10 +366,47 @@ public class DBproject{
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-
 	}
 
 	public static void AddPilot(DBproject esql) {//2
+		String fullname;
+		String nationality;
+		do {
+			//Asking for name of the pilot
+			System.out.print("You have selected to add a pilot to the database. Please answer the following questions.\n");
+			System.out.print("What is the full name of the pilot?\n");
+			try {
+				fullname = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			//Asking for nationality of the pilot
+			System.out.print("What is the nationality of the pilot?\n");
+			try {
+				nationality = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		try {
+			//Inserting pilot into database
+			String query = String.format("SELECT id FROM Pilot");
+			List<List<String>> data_id = esql.executeQueryAndReturnResult(query);
+			int id = data_id.size();
+
+			query = String.format("INSERT INTO Pilot (id, fullname, nationality) VALUES (%d, '%s', '%s')", id, fullname, nationality);
+			esql.executeUpdate(query);
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public static void AddFlight(DBproject esql) {//3
