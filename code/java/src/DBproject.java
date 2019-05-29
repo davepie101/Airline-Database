@@ -300,13 +300,71 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddPlane(DBproject esql) {//1
-		try {
-			String query = "";
-			System.out.print("");
-			String input = in.readLine();
-			query += input;
+		int id;
+		String make;
+		int age;
+		int seats;
+		String model;
+		do {
+			//Asking for id of plane
+			System.out.print("You have selected to add a plane to the database. Please enter in the following details: \n");
+			System.out.print("What is the id of the plane?\n");
+			try { 
+				id = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
 
-		}
+		do {
+			//Asking for make of plane
+			System.out.print("What is the make of the plane?\n");
+			try {
+				make = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			//Asking for model of plane
+			System.out.print("What is the model of the plane?\n");
+			try {
+				model = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			//Asking for the age of the plane
+			System.out.print("What is the age of the plane?\n");
+			try { 
+				age = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			//Asking for the number of seats on the plane
+			System.out.print("How many seats does the plane contain?\n");
+			try { 
+				seats = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
 	}
 
 	public static void AddPilot(DBproject esql) {//2
