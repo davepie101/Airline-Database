@@ -587,7 +587,7 @@ public class DBproject{
 	
 	public static void FindPassengersCountWithStatus(DBproject esql) {//9
 		String status;
-
+		int fnum;
 		System.out.print("You have selected to find the total number of passengers with a given status. Please enter the following information.\n");
 		System.out.print("What is the status of the passenger? Please input one of the following: W-Waitlisted, C-Confirmed, R-Reserved\n");
 		do {
@@ -602,5 +602,49 @@ public class DBproject{
 			}
 			
 		}while (true);
+
+		do {
+			System.out.print("What is the flight number?\n");
+			try {
+				fnum = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input for flight number is invalid!");
+				continue;
+			}
+		}while (true);
+
+		try {
+			String query;
+			List<List<String>> list_passengers;
+			int num_pass = 0;
+			String end_message;
+			if (status.equals("W")) {
+				query = String.format("SELECT * FROM Reservation WHERE fid = %d AND status = 'W'", fnum);
+				list_passengers = esql.executeQueryAndReturnResult(query);
+				num_pass = list_passengers.size();
+				end_message = String.format("The number of passengers that are waitlisted for flight %d is %d.", fnum, num_pass);
+				
+				System.out.print(end_message + "\n");
+			}
+			else if (status.equals("R")) {
+				query = String.format("SELECT * FROM Reservation WHERE fid = %d AND status = 'R'", fnum);
+				list_passengers = esql.executeQueryAndReturnResult(query);
+				num_pass = list_passengers.size();
+				end_message = String.format("The number of passengers that are reserved for flight %d is %d.", fnum, num_pass);
+				
+				System.out.print(end_message + "\n");
+			}
+			else {
+				query = String.format("SELECT * FROM Reservation WHERE fid = %d AND status = 'C'", fnum);
+				list_passengers = esql.executeQueryAndReturnResult(query);
+				num_pass = list_passengers.size();
+				end_message = String.format("The number of passengers that are confirmed for flight %d is %d.", fnum, num_pass);
+				
+				System.out.print(end_message + "\n");
+			}
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 }
