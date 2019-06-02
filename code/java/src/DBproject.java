@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This class defines a simple embedded SQL utility class that is designed to
@@ -585,6 +586,21 @@ public class DBproject{
 	}
 	
 	public static void FindPassengersCountWithStatus(DBproject esql) {//9
-		// Find how many passengers there are with a status (i.e. W,C,R) and list that number.
+		String status;
+
+		System.out.print("You have selected to find the total number of passengers with a given status. Please enter the following information.\n");
+		System.out.print("What is the status of the passenger? Please input one of the following: W-Waitlisted, C-Confirmed, R-Reserved\n");
+		do {
+			Scanner myObj = new Scanner(System.in);
+			status = myObj.nextLine();
+
+			if (status.equals("W") || status.equals("C") || status.equals("R")) {
+				break;
+			}
+			else {
+				System.out.print("The input you have entered is invalid. Please enter W, C, or R.\n");
+			}
+			
+		}while (true);
 	}
 }
