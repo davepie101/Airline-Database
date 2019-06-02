@@ -625,7 +625,7 @@ public class DBproject{
 				num_pass = list_passengers.size();
 				end_message = String.format("The number of passengers that are waitlisted for flight %d is %d.", fnum, num_pass);
 				
-				System.out.print(end_message + "\n");
+				System.out.print(end_message + "\n\n");
 			}
 			else if (status.equals("R")) {
 				query = String.format("SELECT * FROM Reservation WHERE fid = %d AND status = 'R'", fnum);
@@ -633,7 +633,7 @@ public class DBproject{
 				num_pass = list_passengers.size();
 				end_message = String.format("The number of passengers that are reserved for flight %d is %d.", fnum, num_pass);
 				
-				System.out.print(end_message + "\n");
+				System.out.print(end_message + "\n\n");
 			}
 			else {
 				query = String.format("SELECT * FROM Reservation WHERE fid = %d AND status = 'C'", fnum);
@@ -641,7 +641,7 @@ public class DBproject{
 				num_pass = list_passengers.size();
 				end_message = String.format("The number of passengers that are confirmed for flight %d is %d.", fnum, num_pass);
 				
-				System.out.print(end_message + "\n");
+				System.out.print(end_message + "\n\n");
 			}
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
