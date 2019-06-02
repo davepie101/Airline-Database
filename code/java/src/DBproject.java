@@ -410,7 +410,7 @@ public class DBproject{
 	}
 
 	public static void AddFlight(DBproject esql) {//3
-		// Given a pilot, plane and flight, adds a flight in the DB
+
 	}
 
 	public static void AddTechnician(DBproject esql) {//4
@@ -450,6 +450,16 @@ public class DBproject{
 		}while (true);
 
 		try {
+			String query1 = String.format("SELECT P.seats - (SELECT F.num_sold FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND FL.flight_id = F.fnum and F.fnum = %d AND F.actual_departure_date = '%s')", flight_num, depart_date); 
+			String query2 = String.format(" as Seats_Available FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND FL.flight_id = F.fnum AND F.fnum = %d AND F.actual_departure_date = '%s'", flight_num, depart_date);
+
+			query1 = query1 + query2;
+			esql.executeQueryAndPrintResult(query1);
+			int test = esql.executeQuery(query1);
+			System.out.print("Test: " + test);
+			System.out.print("The number of seats available for the following flight number and departure date is ");
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 
 	}
