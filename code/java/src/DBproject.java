@@ -414,6 +414,31 @@ public class DBproject{
 	}
 
 	public static void AddTechnician(DBproject esql) {//4
+		int id;
+		String full_name;
+
+		do {
+			System.out.print("You have selected to add a technician to the database. Please enter the following information: \n");
+			System.out.print("What is the full name of the technician?\n");
+			try {
+				full_name = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		try {
+			String query = String.format("SELECT id FROM Technician");
+			List<List<String>> data_id = esql.executeQueryAndReturnResult(query);
+			id = data_id.size();
+
+			query = String.format("INSERT INTO Technician (id, full_name) VALUES (%d, '%s')", id, full_name);
+			esql.executeUpdate(query);
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public static void BookFlight(DBproject esql) {//5
