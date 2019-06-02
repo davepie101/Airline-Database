@@ -308,7 +308,7 @@ public class DBproject{
 
 		do {
 			//Asking for make of plane
-			System.out.print("You have selected to add a plane to the database. Please answer the following questions.\n");
+			System.out.print("You have selected to add a plane to the database. Please enter the following information.\n");
 			System.out.print("What is the make of the plane?\n");
 			try {
 				make = in.readLine();
@@ -373,7 +373,7 @@ public class DBproject{
 		String nationality;
 		do {
 			//Asking for name of the pilot
-			System.out.print("You have selected to add a pilot to the database. Please answer the following questions.\n");
+			System.out.print("You have selected to add a pilot to the database. Please enter the following information.\n");
 			System.out.print("What is the full name of the pilot?\n");
 			try {
 				fullname = in.readLine();
@@ -410,7 +410,95 @@ public class DBproject{
 	}
 
 	public static void AddFlight(DBproject esql) {//3
+		int cost;
+		int stops;
+		String depart_date;
+		String arrival_date;
+		String source;
+		String destination;
+		do {
+			//Asking cost of ticket
+			System.out.print("You have selected to add a flight to the database. Please enter the following information.\n");
+			System.out.print("What is the cost of a ticket for this flight?\n");
+			try {
+				cost = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
 
+		do {
+			// Asking for the departure date
+			System.out.print("What is the departure date for this flight?\n");
+			try {
+				depart_date = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			// Asking for the arrival date
+			System.out.print("What is the arrival date for this flight?\n");
+			try {
+				arrival_date = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			// Asking for the airport source
+			System.out.print("What is the code for the arrival airport?\n");
+			try {
+				source = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			// Asking for the airport source
+			System.out.print("What is the code for the departure airport?\n");
+			try {
+				destination = in.readLine();
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		do {
+			// Asking for the number of stops for this flight
+			System.out.print("How many stops will there be for this flight?\n");
+			try {
+				stops = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Your input is invalid!");
+				continue;
+			}
+		}while (true);
+
+		try {
+			String query = String.format("SELECT fnum FROM Flight");
+			List<List<String>> data_id = esql.executeQueryAndReturnResult(query);
+			int fnum = data_id.size();
+
+			query = String.format("INSERT INTO Flight (fnum, cost, num_sold, num_stops, actual_departure_date, actual_arrival_date, arrival_airport, departure_airport) VALUES (%d, %d, 0, %d, '%s', '%s', '%s', '%s')", fnum, cost, stops, depart_date, arrival_date, source, destination);
+			esql.executeUpdate(query);
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public static void AddTechnician(DBproject esql) {//4
@@ -418,7 +506,7 @@ public class DBproject{
 		String full_name;
 
 		do {
-			System.out.print("You have selected to add a technician to the database. Please enter the following information: \n");
+			System.out.print("You have selected to add a technician to the database. Please enter the following information. \n");
 			System.out.print("What is the full name of the technician?\n");
 			try {
 				full_name = in.readLine();
