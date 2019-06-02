@@ -551,21 +551,9 @@ public class DBproject{
 			}
 		}while (true);
 
-		do {
-			System.out.print("What is the departure date of the flight?\n");
-			
-			try {
-				depart_date = in.readLine();
-				break;
-			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
-				continue;
-			}
-		}while (true);
-
 		try {
-			String query1 = String.format("SELECT P.seats - (SELECT F.num_sold FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND FL.flight_id = F.fnum and F.fnum = %d AND F.actual_departure_date = '%s')", flight_num, depart_date); 
-			String query2 = String.format(" as Available_seats FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND FL.flight_id = F.fnum AND F.fnum = %d AND F.actual_departure_date = '%s'", flight_num, depart_date);
+			String query1 = String.format("SELECT P.seats - (SELECT F.num_sold FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND FL.flight_id = F.fnum and F.fnum = %d)", flight_num); 
+			String query2 = String.format(" as Available_seats FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND FL.flight_id = F.fnum AND F.fnum = %d", flight_num);
 
 			query1 = query1 + query2;
 			System.out.print("\n");
