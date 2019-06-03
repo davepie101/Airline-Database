@@ -321,7 +321,7 @@ public class DBproject{
 				boolean match = matcher.matches();
 
 				if (!match) {
-					System.out.println("ERROR: Your input for make has to consist of alphabets");
+					System.out.println("ERROR: Your input for make has to consist of alphabets.");
 				}
 				else {
 					break;
@@ -376,7 +376,7 @@ public class DBproject{
 
 			query = String.format("INSERT INTO Plane (id, make, model, age, seats) VALUES (%d, '%s', '%s', %d, %d)", id, make, model, age, seats);
 			esql.executeUpdate(query);
-			System.out.print("\n\n");
+			System.out.print("You have successfully added a plane to the database.\n\n");
 
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -386,13 +386,25 @@ public class DBproject{
 	public static void AddPilot(DBproject esql) {//2
 		String fullname;
 		String nationality;
+
+		System.out.print("You have selected to add a pilot to the database. Please enter the following information.\n");
+
 		do {
 			//Asking for name of the pilot
-			System.out.print("You have selected to add a pilot to the database. Please enter the following information.\n");
 			System.out.print("What is the full name of the pilot?\n");
 			try {
 				fullname = in.readLine();
-				break;
+				
+				Pattern pattern = Pattern.compile("[a-zA-z ]*");
+				Matcher matcher = pattern.matcher(fullname);
+				boolean match = matcher.matches();
+
+				if (!match) {
+					System.out.println("ERROR: Your input for full name has to consist of alphabets.");
+				}
+				else {
+					break;
+				}
 			}catch (Exception e) {
 				System.out.println("Your input for the full name of the pilot is invalid!");
 				continue;
@@ -404,7 +416,17 @@ public class DBproject{
 			System.out.print("What is the nationality of the pilot?\n");
 			try {
 				nationality = in.readLine();
-				break;
+				Pattern pattern = Pattern.compile("[a-zA-z ]*");
+				Matcher matcher = pattern.matcher(nationality);
+				boolean match = matcher.matches();
+
+				if (!match) {
+					System.out.println("ERROR: Your input for nationality has to consist of alphabets.");
+				}
+				else {
+					break;
+				}
+
 			}catch (Exception e) {
 				System.out.println("Your input for the nationality of the pilot is invalid!");
 				continue;
@@ -419,7 +441,7 @@ public class DBproject{
 
 			query = String.format("INSERT INTO Pilot (id, fullname, nationality) VALUES (%d, '%s', '%s')", id, fullname, nationality);
 			esql.executeUpdate(query);
-			System.out.print("\n\n");
+			System.out.print("You have successfully added a pilot to the database.\n\n");
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -514,7 +536,7 @@ public class DBproject{
 
 			query = String.format("INSERT INTO Flight (fnum, cost, num_sold, num_stops, actual_departure_date, actual_arrival_date, arrival_airport, departure_airport) VALUES (%d, %d, 0, %d, '%s', '%s', '%s', '%s')", fnum, cost, stops, depart_date, arrival_date, source, destination);
 			esql.executeUpdate(query);
-			System.out.print("\n\n");
+			System.out.print("You have successfully added a flight to the database.\n\n");
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
