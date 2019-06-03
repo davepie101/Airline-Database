@@ -315,7 +315,7 @@ public class DBproject{
 				make = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for make of the plane is invalid!");
 				continue;
 			}
 		}while (true);
@@ -327,7 +327,7 @@ public class DBproject{
 				model = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for model of the plane is invalid!");
 				continue;
 			}
 		}while (true);
@@ -339,7 +339,7 @@ public class DBproject{
 				age = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for age of the plane is invalid!");
 				continue;
 			}
 		}while (true);
@@ -351,7 +351,7 @@ public class DBproject{
 				seats = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for number of seats of the plane is invalid!");
 				continue;
 			}
 		}while (true);
@@ -364,6 +364,7 @@ public class DBproject{
 
 			query = String.format("INSERT INTO Plane (id, make, model, age, seats) VALUES (%d, '%s', '%s', %d, %d)", id, make, model, age, seats);
 			esql.executeUpdate(query);
+			System.out.print("\n\n");
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -380,7 +381,7 @@ public class DBproject{
 				fullname = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the full name of the pilot is invalid!");
 				continue;
 			}
 		}while (true);
@@ -392,7 +393,7 @@ public class DBproject{
 				nationality = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the nationality of the pilot is invalid!");
 				continue;
 			}
 		}while (true);
@@ -405,6 +406,7 @@ public class DBproject{
 
 			query = String.format("INSERT INTO Pilot (id, fullname, nationality) VALUES (%d, '%s', '%s')", id, fullname, nationality);
 			esql.executeUpdate(query);
+			System.out.print("\n\n");
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -417,15 +419,16 @@ public class DBproject{
 		String arrival_date;
 		String source;
 		String destination;
+
+		System.out.print("You have selected to add a flight to the database. Please enter the following information.\n");
 		do {
 			//Asking cost of ticket
-			System.out.print("You have selected to add a flight to the database. Please enter the following information.\n");
 			System.out.print("What is the cost of a ticket for this flight?\n");
 			try {
 				cost = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the cost of the ticket is invalid!");
 				continue;
 			}
 		}while (true);
@@ -437,7 +440,7 @@ public class DBproject{
 				depart_date = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the departure date of the flight is invalid!");
 				continue;
 			}
 		}while (true);
@@ -449,7 +452,7 @@ public class DBproject{
 				arrival_date = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the arrival date of the flight is invalid!");
 				continue;
 			}
 		}while (true);
@@ -461,7 +464,7 @@ public class DBproject{
 				source = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the arrival airport code is invalid!");
 				continue;
 			}
 		}while (true);
@@ -473,7 +476,7 @@ public class DBproject{
 				destination = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the departure airport code is invalid!");
 				continue;
 			}
 		}while (true);
@@ -485,7 +488,7 @@ public class DBproject{
 				stops = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the number of stops is invalid!");
 				continue;
 			}
 		}while (true);
@@ -497,6 +500,7 @@ public class DBproject{
 
 			query = String.format("INSERT INTO Flight (fnum, cost, num_sold, num_stops, actual_departure_date, actual_arrival_date, arrival_airport, departure_airport) VALUES (%d, %d, 0, %d, '%s', '%s', '%s', '%s')", fnum, cost, stops, depart_date, arrival_date, source, destination);
 			esql.executeUpdate(query);
+			System.out.print("\n\n");
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -513,7 +517,7 @@ public class DBproject{
 				full_name = in.readLine();
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the full name of the technician is invalid!");
 				continue;
 			}
 		}while (true);
@@ -525,6 +529,7 @@ public class DBproject{
 
 			query = String.format("INSERT INTO Technician (id, full_name) VALUES (%d, '%s')", id, full_name);
 			esql.executeUpdate(query);
+			System.out.print("\n\n");
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -585,7 +590,7 @@ public class DBproject{
 				flight_num = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input is invalid!");
+				System.out.println("Your input for the flight number is invalid!");
 				continue;
 			}
 		}while (true);
