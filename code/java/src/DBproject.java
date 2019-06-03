@@ -642,7 +642,9 @@ public class DBproject{
 
 			String query = String.format("INSERT INTO Reservation(rnum, cid, fid, status) VALUES (%d, %d, %d, CASE WHEN (SELECT P.seats - F.num_sold FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND F.fnum = FL.flight_id AND F.fnum = %d) > 0 THEN 'C' ELSE 'W' END)", rnum, id, fnum, fnum);
 			esql.executeUpdate(query);
-			
+			query = String.format("UPDATE Flight SET num_sold = num_sold + 1 WHERE fnum = %d", fnum);
+			esql.executeUpdate(query);
+
 			rnum_data = esql.executeQueryAndReturnResult(temp);
 			String new_status = rnum_data.get(rnum).get(3);
 
