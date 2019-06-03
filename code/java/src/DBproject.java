@@ -636,13 +636,23 @@ public class DBproject{
 		}while(true);
 
 		try {
-			String temp = String.format("SELECT rnum FROM Reservation");
+			String temp = String.format("SELECT * FROM Reservation");
 			List<List<String>> rnum_data = esql.executeQueryAndReturnResult(temp);
 			int rnum = rnum_data.size();
 
 			String query = String.format("INSERT INTO Reservation(rnum, cid, fid, status) VALUES (%d, %d, %d, CASE WHEN (SELECT P.seats - F.num_sold FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND F.fnum = FL.flight_id AND F.fnum = %d) > 0 THEN 'C' ELSE 'W' END)", rnum, id, fnum, fnum);
 			esql.executeUpdate(query);
 			
+			rnum_data = esql.executeQueryAndReturnResult(temp);
+			String new_status = rnum_data.get(rnum).get(3);
+
+			if (new_status.equals("C")) {
+				System.out.println("The flight that you wish to book still has seats available. Your reservation is now confirmed.");
+			}
+			else {
+				System.out.println("The flight that you wish to book is sold out. You have now been waitlisted.");
+			}
+			System.out.print("\n");
 		}catch(Exception e) {
 			System.err.println(e.getMessage());
 		}
