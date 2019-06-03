@@ -531,7 +531,33 @@ public class DBproject{
 	}
 
 	public static void BookFlight(DBproject esql) {//5
-		// Given a customer and a flight that he/she wants to book, add a reservation to the DB
+		
+		System.out.print("You have chosen to book a flight. Please enter the following information.\n");
+		int id;
+		int fnum;
+		do {
+			System.out.print("What is the id of the customer?\n");
+			try {
+				id = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Invalid input for customer id.");
+				continue;
+			}
+		}while (true);
+
+		do {
+			System.out.print("What is the number of the flight that you wish to book?\n");
+			try {
+				fnum = Integer.parseInt(in.readLine());
+				break;
+			}catch (Exception e) {
+				System.out.println("Invalid input for flight number.");
+				continue;
+			}
+		}while(true);
+
+
 	}
 
 	public static void ListNumberOfAvailableSeats(DBproject esql) {//6
@@ -567,7 +593,17 @@ public class DBproject{
 
 	public static void ListsTotalNumberOfRepairsPerPlane(DBproject esql) {//7
 		// Count number of repairs per planes and list them in descending order
-	}
+		System.out.print("You have selected to find the number of repairs per plane in descending order.\n");
+
+		try {
+			String query = "SELECT P.id, COUNT(R.rid) AS Repair_Count FROM Plane P, Repairs R WHERE R.plane_id = P.id GROUP BY P.id ORDER BY Count(R.rid) DESC";
+			esql.executeQueryAndPrintResult(query);
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		System.out.print("\n\n");
+	}	
 
 	public static void ListTotalNumberOfRepairsPerYear(DBproject esql) {//8
 		// Count repairs per year and list them in ascending order
