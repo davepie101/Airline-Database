@@ -471,10 +471,18 @@ public class DBproject{
 
 		do {
 			// Asking for the departure date
-			System.out.print("What is the departure date for this flight?\n");
+			System.out.print("What is the departure date for this flight?(i.e. YYYY-MM-DD)\n");
 			try {
 				depart_date = in.readLine();
-				break;
+				
+				String [] dateArr = depart_date.split("-", 3);
+				if (dateArr.length != 3) {
+					System.out.println("Error: Invalid date format.");
+				}
+				else {
+					break;
+				}
+
 			}catch (Exception e) {
 				System.out.println("Your input for the departure date of the flight is invalid!");
 				continue;
@@ -483,10 +491,17 @@ public class DBproject{
 
 		do {
 			// Asking for the arrival date
-			System.out.print("What is the arrival date for this flight?\n");
+			System.out.print("What is the arrival date for this flight?(i.e. YYYY-MM-DD)\n");
 			try {
 				arrival_date = in.readLine();
-				break;
+				
+				String [] dateArr = arrival_date.split("-", 3);
+				if (dateArr.length != 3) {
+					System.out.println("Error: Invalid date format.");
+				}
+				else {
+					break;
+				}
 			}catch (Exception e) {
 				System.out.println("Your input for the arrival date of the flight is invalid!");
 				continue;
@@ -495,10 +510,16 @@ public class DBproject{
 
 		do {
 			// Asking for the airport source
-			System.out.print("What is the code for the arrival airport?\n");
+			System.out.print("What is the 5 character code for the arrival airport?\n");
 			try {
 				source = in.readLine();
-				break;
+				
+				if (source.length() != 5) {
+					System.out.println("Error: Arrival code must be 5 characters.");
+				}
+				else {
+					break;
+				}
 			}catch (Exception e) {
 				System.out.println("Your input for the arrival airport code is invalid!");
 				continue;
@@ -506,11 +527,17 @@ public class DBproject{
 		}while (true);
 
 		do {
-			// Asking for the airport source
-			System.out.print("What is the code for the departure airport?\n");
+			// Asking for the airport destination
+			System.out.print("What is the 5 character code for the departure airport?\n");
 			try {
 				destination = in.readLine();
-				break;
+				
+				if (destination.length() != 5) {
+					System.out.println("Error: Departure code must be 5 characters.");
+				}
+				else {
+					break;
+				}
 			}catch (Exception e) {
 				System.out.println("Your input for the departure airport code is invalid!");
 				continue;
