@@ -557,6 +557,19 @@ public class DBproject{
 			}
 		}while(true);
 
+		try {
+			String temp = String.format("SELECT rnum FROM Reservation");
+			List<List<String>> rnum_data = esql.executeQueryAndReturnResult(temp);
+			int rnum = rnum_data.size();
+
+			String query = String.format("INSERT INTO Reservation(rnum, cid, fid, status) VALUES (%d, %d, %d, CASE WHEN (SELECT P.seats - F.num_sold FROM Plane P, Flight F, FlightInfo FL WHERE P.id = FL.plane_id AND F.fnum = FL.flight_id AND F.fnum = %d) > 0 THEN 'C' ELSE 'W' END)", rnum, id, fnum, fnum);
+			esql.executeUpdate(query);
+			
+		}catch(Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+
 
 	}
 
