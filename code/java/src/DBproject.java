@@ -578,7 +578,17 @@ public class DBproject{
 			System.out.print("What is the full name of the technician?\n");
 			try {
 				full_name = in.readLine();
-				break;
+				
+				Pattern pattern = Pattern.compile("[a-zA-z ]*");
+				Matcher matcher = pattern.matcher(full_name);
+				boolean match = matcher.matches();
+
+				if (!match) {
+					System.out.println("ERROR: Your input for full name has to consist of alphabets.");
+				}
+				else {
+					break;
+				}
 			}catch (Exception e) {
 				System.out.println("Your input for the full name of the technician is invalid!");
 				continue;
@@ -644,7 +654,6 @@ public class DBproject{
 	public static void ListNumberOfAvailableSeats(DBproject esql) {//6
 		// For flight number and date, find the number of availalbe seats (i.e. total plane capacity minus booked seats )
 		int flight_num;
-		String depart_date;
 
 		System.out.print("To find the number of seats for a given flight, please enter the following information. \n");
 		do {
