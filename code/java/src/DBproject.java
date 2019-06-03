@@ -254,7 +254,7 @@ public class DBproject{
 				System.out.println("7. List total number of repairs per plane in descending order");
 				System.out.println("8. List total number of repairs per year in ascending order");
 				System.out.println("9. Find total number of passengers with a given status");
-				System.out.println("10. < EXIT");
+				System.out.println("10. < EXIT\n");
 				
 				switch (readChoice()){
 					case 1: AddPlane(esql); break;
@@ -606,7 +606,15 @@ public class DBproject{
 	}	
 
 	public static void ListTotalNumberOfRepairsPerYear(DBproject esql) {//8
-		// Count repairs per year and list them in ascending order
+		System.out.print("You have selected to view the number of repairs per year in ascending order\n");
+
+		try {
+			String query = "SELECT DISTINCT EXTRACT(year FROM repair_date) AS YEAR, COUNT(rid) FROM Repairs GROUP BY EXTRACT(year FROM repair_date) ORDER BY COUNT(rid) ASC";
+			esql.executeQueryAndPrintResult(query);
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		System.out.print("\n\n");
 	}
 	
 	public static void FindPassengersCountWithStatus(DBproject esql) {//9
