@@ -24,6 +24,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class defines a simple embedded SQL utility class that is designed to
@@ -306,14 +308,24 @@ public class DBproject{
 		int age;
 		int seats;
 		String model;
+		System.out.print("You have selected to add a plane to the database. Please enter the following information.\n");
 
 		do {
 			//Asking for make of plane
-			System.out.print("You have selected to add a plane to the database. Please enter the following information.\n");
 			System.out.print("What is the make of the plane?\n");
 			try {
 				make = in.readLine();
-				break;
+
+				Pattern pattern = Pattern.compile("[a-zA-z ]*");
+				Matcher matcher = pattern.matcher(make);
+				boolean match = matcher.matches();
+
+				if (!match) {
+					System.out.println("ERROR: Your input for make has to consist of alphabets");
+				}
+				else {
+					break;
+				}
 			}catch (Exception e) {
 				System.out.println("Your input for make of the plane is invalid!");
 				continue;
@@ -339,7 +351,7 @@ public class DBproject{
 				age = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input for age of the plane is invalid!");
+				System.out.println("Your input for age of the plane is invalid! Please try again.");
 				continue;
 			}
 		}while (true);
@@ -351,7 +363,7 @@ public class DBproject{
 				seats = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input for number of seats of the plane is invalid!");
+				System.out.println("Your input for number of seats of the plane is invalid! Please try again.");
 				continue;
 			}
 		}while (true);
@@ -365,6 +377,7 @@ public class DBproject{
 			query = String.format("INSERT INTO Plane (id, make, model, age, seats) VALUES (%d, '%s', '%s', %d, %d)", id, make, model, age, seats);
 			esql.executeUpdate(query);
 			System.out.print("\n\n");
+
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -410,6 +423,7 @@ public class DBproject{
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
+
 	}
 
 	public static void AddFlight(DBproject esql) {//3
@@ -428,7 +442,7 @@ public class DBproject{
 				cost = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input for the cost of the ticket is invalid!");
+				System.out.println("Your input for the cost of the ticket is invalid! Please try again.");
 				continue;
 			}
 		}while (true);
@@ -488,7 +502,7 @@ public class DBproject{
 				stops = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input for the number of stops is invalid!");
+				System.out.println("Your input for the number of stops is invalid! Please try again.");
 				continue;
 			}
 		}while (true);
@@ -546,7 +560,7 @@ public class DBproject{
 				id = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Invalid input for customer id.");
+				System.out.println("Your input for the customer id is invalid! Please try again.");
 				continue;
 			}
 		}while (true);
@@ -557,7 +571,7 @@ public class DBproject{
 				fnum = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Invalid input for flight number.");
+				System.out.println("Your input for the flight number is invalid! Please try again. ");
 				continue;
 			}
 		}while(true);
@@ -582,15 +596,16 @@ public class DBproject{
 		// For flight number and date, find the number of availalbe seats (i.e. total plane capacity minus booked seats )
 		int flight_num;
 		String depart_date;
+
+		System.out.print("To find the number of seats for a given flight, please enter the following information. \n");
 		do {
 			//Asking for flight number
-			System.out.print("To find the number of seats for a given flight, please enter the following information. \n");
 			System.out.print("What is the flight number?\n");
 			try {
 				flight_num = Integer.parseInt(in.readLine());
 				break;
 			}catch (Exception e) {
-				System.out.println("Your input for the flight number is invalid!");
+				System.out.println("Your input for the flight number is invalid! Please try again.");
 				continue;
 			}
 		}while (true);
