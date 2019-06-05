@@ -897,7 +897,7 @@ public class DBproject{
 			}
 			else {
 				System.out.println("\033[1;31m");
-				System.out.print("The input you have entered is invalid. Please enter W, C, or R.\n");
+				System.out.println("The input you have entered is invalid. Please enter W, C, or R.");
 				System.out.println("\033[0m");
 			}
 
@@ -906,7 +906,7 @@ public class DBproject{
 		do {
 			System.out.println("\033[32m");
 			System.out.print("What is the flight number?\n");
-			System.out.println("\033[30m");
+			System.out.println("\033[0m");
 
 			try {
 				fnum = Integer.parseInt(in.readLine());
